@@ -16,44 +16,44 @@ def data_load():
 
 
     # B-mode data loader
-    train_data_Bmode = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\B-mode\train', transform=data_transform)
+    train_data_Bmode = torchvision.datasets.ImageFolder(root='.../Dataset/1/B-mode/train', transform=data_transform)
     train_data_Bmode_loader = torch.utils.data.DataLoader(train_data_Bmode, batch_size=16,  shuffle=False, num_workers=0)
     num_train_instances = len(train_data_Bmode)
 
-    test_data_Bmode = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\B-mode\test', transform=data_transform)
+    test_data_Bmode = torchvision.datasets.ImageFolder(root='.../Dataset/1/B-mode/test', transform=data_transform)
     test_data_Bmode_loader = torch.utils.data.DataLoader(test_data_Bmode, batch_size=16, shuffle=False, num_workers=0)
     num_test_instances = len(test_data_Bmode)
 
 
     # R1 data loader
-    train_data_R1 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\R1\train', transform=data_transform)
+    train_data_R1 = torchvision.datasets.ImageFolder(root='.../Dataset/1/R1/train', transform=data_transform)
     train_data_R1_loader = torch.utils.data.DataLoader(train_data_R1, batch_size=16, shuffle=False, num_workers=0)
 
-    test_data_R1 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\R1\test', transform=data_transform)
+    test_data_R1 = torchvision.datasets.ImageFolder(root='.../Dataset/1/R1/test', transform=data_transform)
     test_data_R1_loader = torch.utils.data.DataLoader(test_data_R1, batch_size=16, shuffle=False, num_workers=0)
 
 
     # R4 data loader
-    train_data_R4 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\R4\train', transform=data_transform)
+    train_data_R4 = torchvision.datasets.ImageFolder(root='.../Dataset/1/R4/train', transform=data_transform)
     train_data_R4_loader = torch.utils.data.DataLoader(train_data_R4,  batch_size=16, shuffle=False, num_workers=0)
 
-    test_data_R4 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\R4\test', transform=data_transform)
+    test_data_R4 = torchvision.datasets.ImageFolder(root='.../Dataset/1/R4/test', transform=data_transform)
     test_data_R4_loader = torch.utils.data.DataLoader(test_data_R4, batch_size=16, shuffle=False, num_workers=0)
 
 
     # S1 data loader
-    train_data_S1= torchvision.datasets.ImageFolder(root=r'...\Dataset\1\S1\train', transform=data_transform)
+    train_data_S1= torchvision.datasets.ImageFolder(root='.../Dataset/1/S1/train', transform=data_transform)
     train_data_S1_loader = torch.utils.data.DataLoader(train_data_S1, batch_size=16, shuffle=False, num_workers=0)
 
-    test_data_S1 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\S1\test', transform=data_transform)
+    test_data_S1 = torchvision.datasets.ImageFolder(root='.../Dataset/1/S1/test', transform=data_transform)
     test_data_S1_loader = torch.utils.data.DataLoader(test_data_S1, batch_size=16, shuffle=False, num_workers=0)
 
 
     # S4 data loader
-    train_data_S4= torchvision.datasets.ImageFolder(root=r'...\Dataset\1\S4\train', transform=data_transform)
+    train_data_S4= torchvision.datasets.ImageFolder(root='.../Dataset/1/S4/train', transform=data_transform)
     train_data_S4_loader = torch.utils.data.DataLoader(train_data_S4, batch_size=16, shuffle=False, num_workers=0)
 
-    test_data_S4 = torchvision.datasets.ImageFolder(root=r'...\Dataset\1\S4\test', transform=data_transform)
+    test_data_S4 = torchvision.datasets.ImageFolder(root='.../Dataset/1/S4/test', transform=data_transform)
     test_data_S4_loader = torch.utils.data.DataLoader(test_data_S4, batch_size=16, shuffle=False, num_workers=0)
 
 
