@@ -131,7 +131,7 @@ class MSResNet(nn.Module):
                                bias=False)
         self.bn1 = nn.BatchNorm2d(12)
         self.relu = nn.ReLU(inplace=True)
-        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)  # output size 56
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1) 
 
         self.layer3x3_1 = self._make_layer3(BasicBlock3x3, 64, layers[0], stride=2)
         self.layer3x3_2 = self._make_layer3(BasicBlock3x3, 128, layers[1], stride=2)
