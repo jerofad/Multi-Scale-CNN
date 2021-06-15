@@ -10,13 +10,13 @@ def conv3x3(in_planes, out_planes, stride=1):
 
 
 def conv5x5(in_planes, out_planes, stride=1):
-     """5x5 convolution with padding"""
+    """5x5 convolution with padding"""
     return nn.Conv2d(in_planes, out_planes, kernel_size=5, stride=stride,
                      padding=1, bias=False)
 
 
 def conv7x7(in_planes, out_planes, stride=1):
-     """7x7 convolution with padding"""
+    """7x7 convolution with padding"""
     return nn.Conv2d(in_planes, out_planes, kernel_size=7, stride=stride,
                      padding=1, bias=False)
 
