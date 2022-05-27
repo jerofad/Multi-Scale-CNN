@@ -13,11 +13,11 @@ import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
 from polyloss import PolyLoss
 
-# torch.manual_seed(2021)  # cpu
-# torch.cuda.manual_seed(2021)  # gpu
-# np.random.seed(2021)  # numpy
-# random.seed(2021)  # random and transforms
-# torch.backends.cudnn.deterministic = True  
+torch.manual_seed(2021)  # cpu
+torch.cuda.manual_seed(2021)  # gpu
+np.random.seed(2021)  # numpy
+random.seed(2021)  # random and transforms
+torch.backends.cudnn.deterministic = True  
 
 writer = SummaryWriter()
 
@@ -30,7 +30,6 @@ def worker_init_fn(worker_id):
 batch_size = 16
 num_epochs = 5
 target_names = ['Abnormal', 'normal']
-# samples_train, labels_train, samples_test, labels_test, num_train_instances, num_test_instances = data_load()
 
 train_data_loader, test_data_loader, num_train_instances, num_test_instances = data_load()
 
@@ -59,20 +58,11 @@ if __name__ == '__main__':
         correct_train = 0
         for i, (samples, labels) in enumerate(train_data_loader):
                 samplesV = Variable(samples.to(device))
-                # samplesX0 = samplesV[:, 0:1, :, :]
-                # samplesX1 = samplesV[:, 1:2, :, :]
-                # samplesX2 = samplesV[:, 2:3, :, :]
-                # samplesX3 = samplesV[:, 3:4, :, :]
-                # samplesX4 = samplesV[:, 4:5, :, :]
-                # labels = labels.squeeze()
                 labelsV = Variable(labels.to(device))
                 optimizer.zero_grad()
-                # predict_label = msresnet(samplesX0, samplesX1, samplesX2, samplesX3, samplesX4)
                 predict_label = msresnet(samplesV)
-                # prediction = predict_label[0].data.max(1)[1]
                 _, prediction = torch.max(predict_label, 1)
                 correct_train += prediction.eq(labelsV.data.long()).sum()
-
                 loss = criterion(predict_label, labelsV)
                 loss_x += loss.item()
                 loss.backward()
@@ -99,16 +89,8 @@ if __name__ == '__main__':
         for i, (samples, labels) in enumerate(test_data_loader):
             with torch.no_grad():
                 samplesV = Variable(samples.to(device))
-                # samplesX0 = samplesV[:, 0:1, :, :]
-                # samplesX1 = samplesV[:, 1:2, :, :]
-                # samplesX2 = samplesV[:, 2:3, :, :]
-                # samplesX3 = samplesV[:, 3:4, :, :]
-                # samplesX4 = samplesV[:, 4:5, :, :]
-                # labels = labels.squeeze()
                 labelsV = Variable(labels.to(device))
-                # predict_label = msresnet(samplesX0, samplesX1, samplesX2, samplesX3, samplesX4)
                 predict_label = msresnet(samplesV)
-                # prediction = predict_label[0].data.max(1)[1]
                 _, prediction = torch.max(predict_label, 1)
 
                 correct_test += prediction.eq(labelsV.data.long()).sum()
@@ -143,15 +125,3 @@ if __name__ == '__main__':
             print(classification_report(y_true, y_pre, digits=4, target_names=target_names), '\n')
 
     print(str(100 * float(temp_test) / num_test_instances)[0:6])
-
-
-    # sio.savemat('result/changingResnet/TrainLoss_' + 'ChangingSpeed_Train' + str(100*float(temp_train)/num_train_instances)[0:6] + 'Test' + str(100*float(temp_test)/num_test_instances)[0:6] + '.mat', {'train_loss': train_loss})
-    # sio.savemat('result/changingResnet/TestLoss_' + 'ChangingSpeed_Train' + str(100*float(temp_train)/num_train_instances)[0:6] + 'Test' + str(100*float(temp_test)/num_test_instances)[0:6] + '.mat', {'test_loss': test_loss})
-    # sio.savemat('result/changingResnet/TrainAccuracy_' + 'ChangingSpeed_Train' + str(100*float(temp_train)/num_train_instances)[0:6] + 'Test' + str(100*float(temp_test)/num_test_instances)[0:6] + '.mat', {'train_acc': train_acc})
-    # sio.savemat('result/changingResnet/TestAccuracy_' + 'ChangingSpeed_Train' + str(100*float(temp_train)/num_train_instances)[0:6] + 'Test' + str(100*float(temp_test)/num_test_instances)[0:6] + '.mat', {'test_acc': test_acc})
-    # print(str(float(temp_test)/num_test_instances)[0:6])
-    # print(str(float(correct_test)/num_test_instances)[0:6])
-    
-    # plt.plot(train_loss)
-    # plt.show()
-

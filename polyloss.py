@@ -19,9 +19,7 @@ class PolyLoss(torch.nn.Module):
 
     def forward(self, outputs, targets):
         ce = cross_entropy(outputs, targets, reduction='none', weight=self.weight)
-        # pt = one_hot(, outputs.size()[1]) * softmax(outputs, 1)
-        onehot_target = one_hot(targets) #, num_classes=self.num_classes
-        
+        onehot_target = one_hot(targets)
         pt = torch.sum(onehot_target * softmax(outputs, dim=-1), dim=-1)
         poly =  ce + self.epsilon * (1.0 - pt)
         if self.reduction == 'mean':
