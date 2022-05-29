@@ -11,15 +11,18 @@ class PolyLoss(torch.nn.Module):
     for cross_entropy loss
     """
 
-    def __init__(self, epsilon=2.0, reduction='none', weight=None):
+    def __init__(self, epsilon=1.0, reduction='none',num_classes=3, weight=None):
         super().__init__()
         self.epsilon = epsilon
         self.reduction = reduction
         self.weight = weight
+        self.num_classes = num_classes
 
     def forward(self, outputs, targets):
         ce = cross_entropy(outputs, targets, reduction='none', weight=self.weight)
-        onehot_target = one_hot(targets)
+        # pt = one_hot(, outputs.size()[1]) * softmax(outputs, 1)
+        onehot_target = one_hot(targets, num_classes=self.num_classes)
+        
         pt = torch.sum(onehot_target * softmax(outputs, dim=-1), dim=-1)
         poly =  ce + self.epsilon * (1.0 - pt)
         if self.reduction == 'mean':
