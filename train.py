@@ -52,7 +52,6 @@ if __name__ == '__main__':
     for epoch in range(num_epochs):
         print('Epoch:', epoch)
         msresnet.train()
-        scheduler.step()
 
         loss_x = 0
         correct_train = 0
@@ -63,12 +62,16 @@ if __name__ == '__main__':
                 predict_label = msresnet(samplesV)
                 _, prediction = torch.max(predict_label, 1)
                 correct_train += prediction.eq(labelsV.data.long()).sum()
+
                 loss = criterion(predict_label, labelsV)
                 loss_x += loss.item()
                 loss.backward()
                 optimizer.step()
-        
+                
+        scheduler.step()
+
         accuracy = 100*float(correct_train)/num_train_instances
+        
         print("Training accuracy:", accuracy)
         writer.add_scalar("Loss/train", loss_x / num_train_instances, epoch)
         writer.add_scalar("Accuracy/train", accuracy, epoch)
@@ -99,15 +102,15 @@ if __name__ == '__main__':
                 loss = criterion(predict_label, labelsV)
                 loss_x += loss.item()
 
-        acc = (100 * float(correct_test) / num_test_instances)
-        print("Test accuracy:",acc )
+        acc_test = (100 * float(correct_test) / num_test_instances)
+        print("Test accuracy:", acc_test )
 
         writer.add_scalar("Loss/test", loss_x / num_test_instances, epoch)
-        writer.add_scalar("Accuracy/test", accuracy, epoch)
+        writer.add_scalar("Accuracy/test", acc_test, epoch)
         test_loss[epoch] = loss_x / num_test_instances
-        test_acc[epoch] = acc
+        test_acc[epoch] = acc_test
 
-        testacc = str(acc)[0:6]
+        testacc = str(acc_test)[0:6]
 
         if epoch == 0:
             temp_test = correct_test
